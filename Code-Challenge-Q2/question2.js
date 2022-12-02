@@ -16,12 +16,14 @@ var testData = ["A Y", "B X", "C Z"];
 
 function win_lose_draw(opponent, me, part2 = false) {
 
+    //part 2
     if (part2 == true) {
         if (me == "X") return -1
         if (me == "Y") return 0
         if (me == "Z") return 1
     }
 
+    //part 1
     if (opponent == "A") {
         if (me == "Y") return 1;
         if (me == "X") return 0;
@@ -126,3 +128,9 @@ function part2_returns(opponent, myResult) {
             if (opponent == "C") return "X";
     }
 }
+
+
+
+// Notes. I could have used Tuples, making my life easier. 
+// Could have used a better approach as well
+// But it works as expected
