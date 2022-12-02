@@ -64,7 +64,7 @@ function mainFunction(myData, part2 = false) {
         } else {
             
             var result = win_lose_draw(myData[i][0], myData[i][2]);
-            var points = calculatePoints(result, myy_input);
+            var points = calculatePoints(result, myData[i][2]);
         }
 
         
