@@ -33,14 +33,24 @@ function find_duplicates(a, b, c) {
 }
 
 function main(data) {
-
     for (var i = 0; i < data.length; i = i + 3) {
-      
         console.log(find_duplicates(data[i], data[i+1], data[i+2]))
     }
-
-
 }
 
 
-main(test_data);
+function value_Asci (char){
+    if (char == char.toUpperCase()){
+        var value = ((char.charCodeAt(0)) - 68)
+    } else {
+        var value = ((char.charCodeAt(0)) - 64);
+    }
+    return value;
+}
+
+console.log(value_Asci('a'))
+console.log(value_Asci('z'))
+console.log(value_Asci('A'))
+console.log(value_Asci('Z'))
+
+//main(test_data);
