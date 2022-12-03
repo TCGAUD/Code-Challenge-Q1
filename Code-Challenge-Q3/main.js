@@ -51,7 +51,7 @@ function main(data ,part2 = false) {
             var the_duplicate = (find_duplicates(data[i], data[i + 1], data[i + 2]))
             sum_total += value_Asci(the_duplicate)
         }
-        
+
     } else { // part 1
         for (var i = 0; i < data.length; i++) {
             var a = data[i].substr(0, (data[i].length / 2))
@@ -76,4 +76,4 @@ function value_Asci(char) {
 }
 
 
-console.log(main(test_data));
+console.log(main(real_data));
