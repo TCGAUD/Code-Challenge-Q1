@@ -33,24 +33,25 @@ function find_duplicates(a, b, c) {
 }
 
 function main(data) {
+    var sum_total = 0;
     for (var i = 0; i < data.length; i = i + 3) {
-        console.log(find_duplicates(data[i], data[i+1], data[i+2]))
+        var the_duplicate = (find_duplicates(data[i], data[i+1], data[i+2]))
+        sum_total += value_Asci(the_duplicate)
     }
+
+    return sum_total;
 }
 
 
 function value_Asci (char){
     if (char == char.toUpperCase()){
-        var value = ((char.charCodeAt(0)) - 68)
+        var value = ((char.charCodeAt(0)) - 38)
     } else {
-        var value = ((char.charCodeAt(0)) - 64);
+        var value = ((char.charCodeAt(0)) - 96)
     }
     return value;
 }
 
-console.log(value_Asci('a'))
-console.log(value_Asci('z'))
-console.log(value_Asci('A'))
-console.log(value_Asci('Z'))
 
-//main(test_data);
+
+console.log(main(real_data));
