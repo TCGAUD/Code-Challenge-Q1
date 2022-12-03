@@ -29,16 +29,18 @@ function find_duplicates(a, b, c) {
             }
         }
     }
-    
-}
-
-
-function main() {
-
-
-    console.log(find_duplicates(test_data[0], test_data[1], test_data[2]))
 
 }
 
+function main(data) {
 
-main();
+    for (var i = 0; i < data.length; i = i + 3) {
+      
+        console.log(find_duplicates(data[i], data[i+1], data[i+2]))
+    }
+
+
+}
+
+
+main(test_data);
