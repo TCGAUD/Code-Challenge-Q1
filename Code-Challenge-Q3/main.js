@@ -16,22 +16,34 @@ var test_data = getData(testData);
 
 
 
-function find_duplicates(a, b) {
+function find_duplicates(a, b, c) {
     var the_duplicates = [];
+
     for (var i = 0; i < a.length; i++) {
         for (var j = 0; j < j.length; j++) {
             if (a[i] == b[j]) {
-                if (a[i] in the_duplicates){
-                    continue
-                } else {
-                    the_duplicates.push(a[i])
+                console.log("proc")
+                for (var k = 0; k < c.length; k++) {
+                    if (c[k] == a[i]) {
+                        the_duplicates.push(c[k])
+                    }
                 }
+
             }
+
         }
     }
+    return the_duplicates;
 }
 
 
 function main() {
 
+    console.log(test_data)
+
+    console.log(find_duplicates(test_data[0], test_data[1], test_data[2]))
+
 }
+
+
+main();
