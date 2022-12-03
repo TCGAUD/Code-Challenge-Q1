@@ -19,13 +19,21 @@ var test_data = getData(testData);
 function find_duplicates(a, b, c) {
     var the_duplicates = [];
 
+
     for (var i = 0; i < a.length; i++) {
-        for (var j = 0; j < j.length; j++) {
+        for (var j = 0; j < b.length; j++) {
             if (a[i] == b[j]) {
                 console.log("proc")
                 for (var k = 0; k < c.length; k++) {
                     if (c[k] == a[i]) {
-                        the_duplicates.push(c[k])
+                        for (var p = 0; p < the_duplicates.length; p++) {
+                            if (c[k] == the_duplicates[p]){
+                                continue;
+                            }
+                            else {
+                                the_duplicates.push(c[k])
+                            }
+                        }
                     }
                 }
 
