@@ -28,4 +28,47 @@ function split_data(data){
 }
 
 
-console.log(split_data(test_data));
+function no_subSets(data){
+
+    var total_overlaps = 0;
+
+    data = data.map((x)=>{
+        var low = [], high = [];
+        x = x.map((y)=>{
+            var split_point = y.lastIndexOf('-');
+            low.push(y.substring(0 , split_point))
+            high.push(y.substring(split_point + 1))
+        })
+        var overlapBool = (anaylze_data(low , high))
+        if (overlapBool){
+            total_overlaps += 1;
+        }
+
+        return [low, high]
+    })
+    //console.log(data)
+    return total_overlaps;
+}
+
+function anaylze_data(low, high){
+    if (low[0] >= low[1]){
+        if (high[0] <= high[1]){
+            return 1;
+        }else {
+            0;
+        }
+    }
+    if (low[1] >= low[0]){
+        if (high[1] <= high[0]){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+}
+
+var app_data = split_data(real_data);
+var overlaps = no_subSets(app_data)
+
+console.log(overlaps)
+
