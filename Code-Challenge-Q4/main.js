@@ -92,43 +92,33 @@ function anaylze_data(low, high) {
 
 
 function part2(low, high){
+    
     console.log(low, high)
+
     if (parseInt(low[0]) == parseInt(low[1])){
         return 1;
     }
+
     if (parseInt(high[0]) == parseInt(high[1])){
         return 1;
     }
 
-    if (low[0] == high[1]){
-        return 1;
-    }
 
-    if (low[1] == high[0]){
+   if (parseInt(low[0]) > parseInt(low[1])){
+    
+    if (parseInt(high[1]) >= parseInt(low[0])){
         return 1;
-    }
-
-    if (parseInt(low[0]) < parseInt(low[1])){
-        if (parseInt(high[0]) > parseInt(low[1])){
-            return 1;
-        }
-        if (parseInt(high[0]) > parseInt(high[1])){
-            return 1;
-        }
+    }else {
         return 0;
     }
-
-    if (parseInt(low[0]) > parseInt(low[1])){
-        if (parseInt(high[0]) > parseInt(high[1])){
-            return 1;
-        }
-        if (parseInt(high[0]) < parseInt(high[1])){
-            return 1;
-        }
+   
+   } else {
+    if (parseInt(high[0]) >= parseInt(low[1])){
+        return 1;
+    }else {
         return 0;
     }
-    return 0;
-
+   }
 }
 
 
