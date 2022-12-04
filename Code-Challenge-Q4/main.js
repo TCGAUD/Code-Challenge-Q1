@@ -15,8 +15,6 @@ var real_data = getData(theData);
 var test_data = getData(testData);
 
 
-
-
 function split_data(data) {
     data = data.map((x) => {
         var i = x.lastIndexOf(',');
@@ -26,6 +24,8 @@ function split_data(data) {
     })
     return data;
 }
+
+
 
 
 function no_subSets(data) {
@@ -42,23 +42,24 @@ function no_subSets(data) {
         var overlapBool = (anaylze_data(low, high))
         if (overlapBool) {
             total_overlaps += 1;
+
         }
-       //console.log(overlapBool)
-       //console.log(low , high)
+        //console.log(overlapBool)
+        //console.log(low , high)
         return [low, high]
     })
-    
+
     return total_overlaps;
 }
 
 function anaylze_data(low, high) {
     //console.log(low)
 
-    if (parseInt(low[0]) == parseInt(low[1])){
+    if (parseInt(low[0]) == parseInt(low[1])) {
         return 1;
     }
 
-    if (parseInt(high[0]) == parseInt(high[1])){
+    if (parseInt(high[0]) == parseInt(high[1])) {
         return 1;
     }
 
@@ -70,18 +71,49 @@ function anaylze_data(low, high) {
         }
 
     } else {
-        if (parseInt(high[0]) < parseInt(high[1])){
+        if (parseInt(high[0]) < parseInt(high[1])) {
             return 1;
-        }else {
+        } else {
             return 0;
         }
     }
 }
 
-var app_data = split_data(real_data);
-var overlaps = no_subSets(app_data)
 
-console.log(overlaps)
+
+function getSections(data){
+
+    var theItem = []
+    
+    data.map((item) => {
+        for (var i = 0 ; i < item.length ; i++){
+            var eachItem = []
+            var split_point = item[i].lastIndexOf('-');
+            eachItem.push(item[i].substring(0, split_point))
+            eachItem.push(item[i].substring(split_point + 1))
+            theItem.push(eachItem);
+        }
+    })
+    return theItem
+}
+
+function getAll_overlaps (){
+
+}
+
+//part 1
+
+var app_data = split_data(test_data);
+var overlaps = no_subSets(app_data)
+//console.log(overlaps)
+
+
+//part 2
+var all_sections =getSections(app_data);
+getAll_overlaps(all_sections);
+console.log(all_sections)
+
+
 
 
 
