@@ -26,7 +26,11 @@ function split_data(data) {
 }
 
 
+<<<<<<< HEAD
 
+=======
+var duplicatt = 0;
+>>>>>>> parent of 700a516 (Q3)
 
 function no_subSets(data) {
 
@@ -40,10 +44,22 @@ function no_subSets(data) {
             high.push(y.substring(split_point + 1))
         })
         var overlapBool = (anaylze_data(low, high))
+<<<<<<< HEAD
         if (overlapBool) {
             total_overlaps += 1;
 
         }
+=======
+        var duplic = part2(low, high)
+        console.log(duplic);
+        if (overlapBool) {
+            total_overlaps += 1;
+        }
+        if (duplic) {
+            duplicatt += 1;
+        }
+
+>>>>>>> parent of 700a516 (Q3)
         //console.log(overlapBool)
         //console.log(low , high)
         return [low, high]
@@ -53,20 +69,30 @@ function no_subSets(data) {
 }
 
 function anaylze_data(low, high) {
+<<<<<<< HEAD
     //console.log(low)
+=======
+    
+>>>>>>> parent of 700a516 (Q3)
 
     if (parseInt(low[0]) == parseInt(low[1])) {
+       
         return 1;
     }
 
     if (parseInt(high[0]) == parseInt(high[1])) {
+        
         return 1;
     }
 
     if (parseInt(low[0]) < parseInt(low[1])) {
+       
         if (parseInt(high[0]) >= parseInt(high[1])) {
+            
+            
             return 1;
         } else {
+           
             return 0;
         }
 
@@ -81,10 +107,17 @@ function anaylze_data(low, high) {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 function part2(low, high){
     console.log(low, high)
+=======
+function part2(low, high){
+    
+    console.log(low, high)
+
+>>>>>>> parent of 700a516 (Q3)
     if (parseInt(low[0]) == parseInt(low[1])){
         return 1;
     }
@@ -92,7 +125,14 @@ function part2(low, high){
         return 1;
     }
 
+<<<<<<< HEAD
     if (low[0] == high[1]){
+=======
+
+   if (parseInt(low[0]) > parseInt(low[1])){
+    
+    if (parseInt(high[1]) >= parseInt(low[0])){
+>>>>>>> parent of 700a516 (Q3)
         return 1;
     }
 
@@ -109,6 +149,7 @@ function part2(low, high){
         }
         return 0;
     }
+<<<<<<< HEAD
 
     if (parseInt(low[0]) > parseInt(low[1])){
         if (parseInt(high[0]) > parseInt(high[1])){
@@ -117,12 +158,22 @@ function part2(low, high){
         if (parseInt(high[0]) < parseInt(high[1])){
             return 1;
         }
+=======
+   
+   } else {
+    if (parseInt(high[0]) >= parseInt(low[1])){
+        return 1;
+    }else {
+>>>>>>> parent of 700a516 (Q3)
         return 0;
     }
     return 0;
 
 }
+<<<<<<< HEAD
 >>>>>>> parent of c518e8d (Update main.js)
+=======
+>>>>>>> parent of 700a516 (Q3)
 
 
 //part 1
@@ -131,6 +182,7 @@ var app_data = split_data(real_data);
 
 var overlaps = no_subSets(app_data)
 console.log(overlaps)
+<<<<<<< HEAD
 //console.log(app_data)
 
 
@@ -138,3 +190,14 @@ console.log(overlaps)
 
 
 
+=======
+console.log(duplicatt)
+
+
+
+
+
+
+
+
+>>>>>>> parent of 700a516 (Q3)
