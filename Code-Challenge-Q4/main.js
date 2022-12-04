@@ -17,49 +17,60 @@ var test_data = getData(testData);
 
 
 
-function split_data(data){
-    data = data.map((x)=>{
+function split_data(data) {
+    data = data.map((x) => {
         var i = x.lastIndexOf(',');
         var a = x.substring(0, i).trim();
         var b = x.substring(i + 1).trim();
-        return [a,b]
+        return [a, b]
     })
     return data;
 }
 
 
-function no_subSets(data){
+function no_subSets(data) {
 
     var total_overlaps = 0;
 
-    data = data.map((x)=>{
+    data = data.map((x) => {
         var low = [], high = [];
-        x = x.map((y)=>{
+        x = x.map((y) => {
             var split_point = y.lastIndexOf('-');
-            low.push(y.substring(0 , split_point))
+            low.push(y.substring(0, split_point))
             high.push(y.substring(split_point + 1))
         })
-        var overlapBool = (anaylze_data(low , high))
-        if (overlapBool){
+        var overlapBool = (anaylze_data(low, high))
+        if (overlapBool) {
             total_overlaps += 1;
         }
-
+       //console.log(overlapBool)
+       //console.log(low , high)
         return [low, high]
     })
-    //console.log(data)
+    
     return total_overlaps;
 }
 
-function anaylze_data(low, high){
-    if (low[0] >= low[1]){
-        if (high[0] <= high[1]){
-            return 1;
-        }else {
-            0;
-        }
+function anaylze_data(low, high) {
+    //console.log(low)
+
+    if (parseInt(low[0]) == parseInt(low[1])){
+        return 1;
     }
-    if (low[1] >= low[0]){
-        if (high[1] <= high[0]){
+
+    if (parseInt(high[0]) == parseInt(high[1])){
+        return 1;
+    }
+
+    if (parseInt(low[0]) < parseInt(low[1])) {
+        if (parseInt(high[0]) >= parseInt(high[1])) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    } else {
+        if (parseInt(high[0]) < parseInt(high[1])){
             return 1;
         }else {
             return 0;
@@ -71,4 +82,8 @@ var app_data = split_data(real_data);
 var overlaps = no_subSets(app_data)
 
 console.log(overlaps)
+
+
+
+
 
