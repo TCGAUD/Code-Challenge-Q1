@@ -81,15 +81,38 @@ function anaylze_data(low, high) {
 
 
 
+function getSections(data){
 
+    var theItem = []
+    
+    data.map((item) => {
+        for (var i = 0 ; i < item.length ; i++){
+            var eachItem = []
+            var split_point = item[i].lastIndexOf('-');
+            eachItem.push(item[i].substring(0, split_point))
+            eachItem.push(item[i].substring(split_point + 1))
+            theItem.push(eachItem);
+        }
+    })
+    return theItem
+}
+
+function getAll_overlaps (){
+
+}
 
 //part 1
 
-var app_data = split_data(real_data);
-
+var app_data = split_data(test_data);
 var overlaps = no_subSets(app_data)
-console.log(overlaps)
-//console.log(app_data)
+//console.log(overlaps)
+
+
+//part 2
+var all_sections =getSections(app_data);
+getAll_overlaps(all_sections);
+console.log(all_sections)
+
 
 
 
