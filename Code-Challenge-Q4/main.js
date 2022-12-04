@@ -80,7 +80,49 @@ function anaylze_data(low, high) {
 }
 
 
+<<<<<<< HEAD
 
+=======
+function part2(low, high){
+    console.log(low, high)
+    if (parseInt(low[0]) == parseInt(low[1])){
+        return 1;
+    }
+    if (parseInt(high[0]) == parseInt(high[1])){
+        return 1;
+    }
+
+    if (low[0] == high[1]){
+        return 1;
+    }
+
+    if (low[1] == high[0]){
+        return 1;
+    }
+
+    if (parseInt(low[0]) < parseInt(low[1])){
+        if (parseInt(high[0]) > parseInt(low[1])){
+            return 1;
+        }
+        if (parseInt(high[0]) > parseInt(high[1])){
+            return 1;
+        }
+        return 0;
+    }
+
+    if (parseInt(low[0]) > parseInt(low[1])){
+        if (parseInt(high[0]) > parseInt(high[1])){
+            return 1;
+        }
+        if (parseInt(high[0]) < parseInt(high[1])){
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+
+}
+>>>>>>> parent of c518e8d (Update main.js)
 
 
 //part 1
