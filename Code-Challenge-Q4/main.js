@@ -56,15 +56,20 @@ function anaylze_data(low, high) {
     //console.log(low)
 
     if (parseInt(low[0]) == parseInt(low[1])) {
+        part2(low[0], high[0])
+        part2(low[0], high[1])
         return 1;
     }
 
     if (parseInt(high[0]) == parseInt(high[1])) {
+        part2(low[0], high[1])
+        part2(low[1], high[1])
         return 1;
     }
 
     if (parseInt(low[0]) < parseInt(low[1])) {
         if (parseInt(high[0]) >= parseInt(high[1])) {
+            part2(low[0], high[1])
             return 1;
         } else {
             return 0;
@@ -72,6 +77,7 @@ function anaylze_data(low, high) {
 
     } else {
         if (parseInt(high[0]) < parseInt(high[1])) {
+            part2(low[1], high[0])
             return 1;
         } else {
             return 0;
@@ -79,42 +85,35 @@ function anaylze_data(low, high) {
     }
 }
 
+var the_range = [0 , 0];
+var range_number = 0;
 
+function part2 (low, high){
+    if (the_range[0] == 0){
+        the_range[0] = low;
+    }
+    if(the_range[1] == 0){
+        the_range[1] = high
+    }
+    if (low < the_range[0]){
+        the_range[0] = low;
+    }
+    if(high > the_range[1]){
+        the_range[1] = high
+    }
 
-function getSections(data){
-
-    var theItem = []
-    
-    data.map((item) => {
-        for (var i = 0 ; i < item.length ; i++){
-            var eachItem = []
-            var split_point = item[i].lastIndexOf('-');
-            eachItem.push(item[i].substring(0, split_point))
-            eachItem.push(item[i].substring(split_point + 1))
-            theItem.push(eachItem);
-        }
-    })
-    return theItem
-}
-
-function getAll_overlaps (){
-
+    range_number = (the_range[1] - the_range[0]);
 }
 
 //part 1
 
 var app_data = split_data(test_data);
+
 var overlaps = no_subSets(app_data)
-//console.log(overlaps)
+console.log(overlaps)
+//console.log(app_data)
 
-
-//part 2
-var all_sections =getSections(app_data);
-getAll_overlaps(all_sections);
-console.log(all_sections)
-
-
-
+console.log(the_range, range_number)
 
 
 
