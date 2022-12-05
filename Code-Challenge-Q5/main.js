@@ -27,7 +27,8 @@ function splitData(data) {
         }
 
     }).map((k) => {//5 12
-        return ([parseInt(k[5]), parseInt(k[12]), parseInt(k[k.length - 1])])
+        console.log(k)
+        
     })
 
     data = data.map(item => item).reverse();
@@ -53,7 +54,7 @@ function splitData(data) {
             }
             var a = x.substring(initial, i - 1)
             if (i % 4 == 0) {
-                console.log(a)
+                //console.log(a)
                 myobj.push(a);
                 initial = i;
             }
@@ -66,14 +67,31 @@ function splitData(data) {
     })
 
 
+    var counter = 0;
+    var full_stack = [];
 
-    return data;
+    for (var i = 0; i < data[0].length; i++) {
 
-    //console.log(data)
+        var item_stack = [];
 
+        for (var k = 0; k < data.length; k++) {
+            item_stack.push(data[k][i]);
+        }
 
+        full_stack.push(item_stack);
 
+    }
 
+    full_stack = full_stack.map((x) => {
+        x = x.filter((y) => {
+            if (y != '   ') {
+                return y;
+            }
+        })
+        return x;
+    })
+    
+    return [full_stack , instructions];
 }
 
 // actual part 1
@@ -101,9 +119,9 @@ function process_instructions(stacks, instruct) {
 }
 
 
-var appData = getData(testData)
-console.log(splitData(appData))
-// var part1_out = process_instructions(stacks, instruct);
+var appData = getData(theData)
+var [stacks, instruct] = (splitData(appData))
+//var part1_out = process_instructions(stacks, instruct);
 
 //console.log(part1_out)
 
