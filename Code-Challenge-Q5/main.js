@@ -73,6 +73,16 @@ function splitData(data) {
         }
         AllStacks.push(stackObj)
     }
+
+    AllStacks = AllStacks.map((x) => {
+        x = x.filter((y) => {
+            if (y == '.'){
+            }else {
+                return y;
+            }
+        })
+        return x;
+    })
     return AllStacks;
 }
 
