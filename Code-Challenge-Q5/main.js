@@ -29,7 +29,7 @@ function splitData(data) {
         }
         
     }).map((k) => {//5 12
-        return([k[5] , k[12], k[k.length -1]])
+        return([parseInt(k[5]) , parseInt(k[12]), parseInt(k[k.length -1])])
     })
 
 
@@ -106,12 +106,25 @@ function splitData(data) {
     return [AllStacks , instructions];
 }
 
+// actual part 1
+
+function process_instructions(stacks, instruct) {
+    for (var i = 0; i < instruct.length; i++){
+        var [n,  from_i , put_i] = instruct[i];
+
+        for (var k = 0 ; k < n; k++){
+            var item = stacks[(from_i - 1)].pop();
+            stacks[(put_i - 1)].push(item);
+        }
+        
+    }
+}
+
 
 var appData = getData(testData)
 var [stacks, instruct] = splitData(appData)
+process_instructions(stacks, instruct);
 
-console.log(stacks,instruct)
+console.log(stacks)
 
-function process_instructions() {
 
-}
