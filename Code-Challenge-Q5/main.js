@@ -1,7 +1,5 @@
 
-const { log } = require("console");
 const fs = require("fs");
-const { get } = require("http");
 
 var theData = './data.txt';
 var testData = './test.txt';
@@ -15,6 +13,26 @@ function getData(file) {
 function splitData(data) {
 
     var stop_index = data.length;
+
+    var reached_process = false;
+    var instructions ;
+
+    instructions = data.filter((z, i) => {
+
+        if (z == '') {
+            reached_process = true;
+        }
+
+
+        if (reached_process) {
+            return z;
+        }
+        
+    }).map((k) => {//5 12
+        return([k[5] , k[12], k[k.length -1]])
+    })
+
+
     data = data.map(item => item).reverse();
     var Stacks = []
 
@@ -30,6 +48,8 @@ function splitData(data) {
         }
         i++;
     })
+
+
 
     data.map((x) => {
         var initial = 0;
@@ -52,23 +72,23 @@ function splitData(data) {
     })
 
     Stacks = Stacks.map((x) => {
-       
-        x = x.map((y) =>{
-           if (y != "   "){
-            return y;
-           }else {
-            return '.';
-           }
+
+        x = x.map((y) => {
+            if (y != "   ") {
+                return y;
+            } else {
+                return '.';
+            }
         })
         return x;
     })
 
     var AllStacks = [];
 
-    for (var i = 0; i < Stacks.length; i++){
+    for (var i = 0; i < Stacks.length; i++) {
         var stackObj = [];
-        for (var j = 0; j < Stacks[0].length; j++){
-           
+        for (var j = 0; j < Stacks[0].length; j++) {
+
             stackObj.push(Stacks[j][i]);
         }
         AllStacks.push(stackObj)
@@ -76,21 +96,21 @@ function splitData(data) {
 
     AllStacks = AllStacks.map((x) => {
         x = x.filter((y) => {
-            if (y == '.'){
-            }else {
+            if (y == '.') {
+            } else {
                 return y;
             }
         })
         return x;
     })
-    return AllStacks;
+    return [AllStacks , instructions];
 }
 
 
 var appData = getData(testData)
-var stacks =splitData(appData)
+var [stacks, instruct] = splitData(appData)
 
-console.log(stacks)
+console.log(stacks,instruct)
 
 function process_instructions() {
 
