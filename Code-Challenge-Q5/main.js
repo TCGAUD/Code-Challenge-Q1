@@ -1,4 +1,5 @@
 
+const { log } = require("console");
 const fs = require("fs");
 const { get } = require("http");
 
@@ -12,64 +13,74 @@ function getData(file) {
 }
 
 function splitData(data) {
+
     var stop_index = data.length;
-    var instructions = [];
+    data = data.map(item => item).reverse();
+    var Stacks = []
 
-    var stacks = data;
+    data = data.filter((x, i) => {
 
-    var stack_item = [];
-    var counter = 0;
-
-   
-
-    stacks = stacks.map((x) => {
-        x = x.split(' ');
-        console.log(x.length)
-
-        for (var i = 0; i  < x.length; i++) {
-            if (i % 4 == 0) {
-                if (x[i] != ''){
-                    if (stack_item.length <= counter){
-                        stack_item.push([]);
-                    }
-                    stack_item[counter].push(x[i]);
-                }
-                else{
-                    if (stack_item.length <= counter){
-                        stack_item.push([]);
-                    }
-                    stack_item[counter].push('');
-                }
-                counter++;
-            }
-            //console.log(stack_item)
+        if (x == '') {
+            stop_index = i;
         }
+
+
+        if (i > stop_index + 1) {
+            return x
+        }
+        i++;
+    })
+
+    data.map((x) => {
+        var initial = 0;
+        var myobj = [];
+        for (var i = 0; i < x.length; i++) {
+            if (i == 0) {
+                continue;
+            }
+            var a = x.substring(initial, i - 1)
+            if (i % 4 == 0) {
+                myobj.push(a);
+                initial = i;
+            }
+            if (i == (x.length - 1)) {
+                var b = x.substring((x.length - 3), x.length)
+                myobj.push(b);
+            }
+        }
+        Stacks.push(myobj);
+    })
+
+    Stacks = Stacks.map((x) => {
+       
+        x = x.map((y) =>{
+           if (y != "   "){
+            return y;
+           }else {
+            return '.';
+           }
+        })
         return x;
     })
 
-    //console.log(stack_item)
+    var AllStacks = [];
 
-    instructions = data.filter((x, i) => {
-        if (i > stop_index) {
-            return x;
+    for (var i = 0; i < Stacks.length; i++){
+        var stackObj = [];
+        for (var j = 0; j < Stacks[0].length; j++){
+           
+            stackObj.push(Stacks[j][i]);
         }
-    })
-
-    instructions = instructions.map((x) => {
-        var items = [];
-        items.push(x[5], x[12], x[17])
-        return items;
-
-    })
-
-    return [stacks, instructions];
-
+        AllStacks.push(stackObj)
+    }
+    return AllStacks;
 }
 
-var appData = getData(testData)
-var [stacks, instructions] = splitData(appData)
 
-//console.log(stacks)
+var appData = getData(testData)
+var stacks =splitData(appData)
+
+console.log(stacks)
 
 function process_instructions() {
 
