@@ -15,7 +15,7 @@ function splitData(data) {
     var stop_index = data.length;
 
     var reached_process = false;
-    var instructions;
+    var instructions = [];
 
     instructions = data.filter((z, i) => {
         if (z == '') {
@@ -27,8 +27,17 @@ function splitData(data) {
         }
 
     }).map((k) => {//5 12
-        console.log(k)
-        
+        var a = k.indexOf(' ');
+        var b = k.indexOf(' ', (a + 1));
+        //
+        var the_no = k.substring((a + 1), b);
+        var c = (k.lastIndexOf('m') + 2);
+        var d = (k.indexOf('t') - 1);
+        //
+        var the_mid = k.substring(c, d);
+        var the_last = k.substring((k.length - 1));
+        //console.log(the_no)
+        return([parseInt(the_no), parseInt(the_mid), parseInt(the_last)])
     })
 
     data = data.map(item => item).reverse();
@@ -96,7 +105,7 @@ function splitData(data) {
 
 // actual part 1
 
-function process_instructions(stacks, instruct) {
+function process_instructions(stacks, instruct , part2 = false) {
     for (var i = 0; i < instruct.length; i++) {
         var [n, from_i, put_i] = instruct[i];
 
@@ -104,6 +113,7 @@ function process_instructions(stacks, instruct) {
             var item = stacks[(from_i - 1)].pop();
             stacks[(put_i - 1)].push(item);
         }
+        
 
     }
     //get output for question
@@ -119,10 +129,38 @@ function process_instructions(stacks, instruct) {
 }
 
 
-var appData = getData(theData)
-var [stacks, instruct] = (splitData(appData))
-//var part1_out = process_instructions(stacks, instruct);
 
-//console.log(part1_out)
+function process_part2(stacks, instruct) {
+    for (var i = 0; i < instruct.length; i++) {
+        var [n, from_i, put_i] = instruct[i];
+        
+        var _part2OBJ_ = []
+
+        for (var k = 0; k < n ; k++) {
+            var item = stacks[(from_i - 1 )].pop();
+            _part2OBJ_.push(item);
+        }
+        
+        _part2OBJ_ = _part2OBJ_.reverse();
+        console.log( "part2 : ", _part2OBJ_)
+
+        for (var k = 0; k < _part2OBJ_.length; k++) {
+            stacks[(put_i - 1)].push(_part2OBJ_.pop());
+        }
+
+        console.log( `stack ${put_i}: `,stacks[(put_i - 1)])
+
+    }
+    
+
+}
+
+
+var appData = getData(testData)
+var [stacks, instruct] = (splitData(appData))
+var part1_out = process_instructions(stacks, instruct);
+//var part2_out = process_part2(stacks, instruct);
+
+console.log(part1_out)
 
 
