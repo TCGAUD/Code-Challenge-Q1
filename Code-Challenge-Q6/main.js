@@ -17,13 +17,17 @@ function isUniq(x){
 }
 
 function part1(data) {
+
+    // this variable should be 4 for part 1 and 14 for part 2 EASY
+    var the_part = 4;
+
     var uniq = [];
     for (var i = 0; i < data.length; i++) {
         uniq.push(data[i])
-        if (uniq.length > 4){
+        if (uniq.length > the_part){
             uniq.shift();
         }
-        if (uniq.length == 4 && isUniq(uniq)){
+        if (uniq.length == the_part && isUniq(uniq)){
             console.log(i+1)
             break;
         };
@@ -32,4 +36,5 @@ function part1(data) {
 
 var appData = getData(theData);
 //var tess  = "mjqjpqmgbljsphdztnvjfqwrcgsmlb";
+// part 1. 
 console.log(part1(appData[0]));
