@@ -1,15 +1,18 @@
 
 const fs = require("fs");
+// out inputs
 
 var theData = './data.txt';
 var testData = './test.txt';
 
+//this gets the data nicely
 function getData(file) {
     var myData = fs.readFileSync(file, 'utf-8')
     const arr = myData.split(/\r?\n/);
     return arr;
 }
 
+// This function sorts all the data
 function splitData(data) {
 
     var stop_index = data.length;
@@ -86,11 +89,8 @@ function splitData(data) {
         for (var k = 0; k < data.length; k++) {
             item_stack.push(data[k][i]);
         }
-
         full_stack.push(item_stack);
-
     }
-
     full_stack = full_stack.map((x) => {
         x = x.filter((y) => {
             if (y != '   ') {
@@ -103,6 +103,9 @@ function splitData(data) {
     return [full_stack , instructions];
 }
 
+// Function above is ALOT to explain -> probably better ways.
+// But i wanted to make function to make data usable for funzies instead of hard-editing
+//But why? Because this function will work on DATA that supports format. instead of harcoding arrays
 // actual part 1
 
 function process_instructions(stacks, instruct , part2 = false) {
@@ -114,7 +117,6 @@ function process_instructions(stacks, instruct , part2 = false) {
             stacks[(put_i - 1)].push(item);
         }
         
-
     }
     //get output for question
     var outputString = "";
@@ -124,43 +126,44 @@ function process_instructions(stacks, instruct , part2 = false) {
         })
         outputString += each_stack.pop()
     }
+    console.log('Part 1 : ' , outputString)
     return outputString;
 
 }
-
-
-
+// part 2
 function process_part2(stacks, instruct) {
     for (var i = 0; i < instruct.length; i++) {
         var [n, from_i, put_i] = instruct[i];
         
-        var _part2OBJ_ = []
+        var part2OBJ = []
 
         for (var k = 0; k < n ; k++) {
-            var item = stacks[(from_i - 1 )].pop();
-            _part2OBJ_.push(item);
+            var item = stacks[(from_i - 1)].pop();
+            part2OBJ.push(item);
         }
-        
-        _part2OBJ_ = _part2OBJ_.reverse();
-        console.log( "part2 : ", _part2OBJ_)
-
-        for (var k = 0; k < _part2OBJ_.length; k++) {
-            stacks[(put_i - 1)].push(_part2OBJ_.pop());
+        for (var m = 0; m < n; m++) {
+            var to_move = part2OBJ.pop();
+            stacks[(put_i - 1)].push(to_move);
+            
         }
-
-        console.log( `stack ${put_i}: `,stacks[(put_i - 1)])
-
     }
-    
+    //get output for question
+    var outputString = "";
+    for (var o = 0; o < stacks.length; o++) {
+        var each_stack = stacks[o].map((x) => {
+            return (x[1])
+        })
+        outputString += each_stack.pop()
+    }
+    console.log('Part 2 : ' , outputString)
+    return outputString;
 
 }
 
-
 var appData = getData(testData)
 var [stacks, instruct] = (splitData(appData))
+// Dont run process 1 and 2 at the same time. Each processes changed data. The inputs can fail then
+// Why tho ? Because thats math and i overwrited the stacks instead of duplicating. 
+
 var part1_out = process_instructions(stacks, instruct);
 //var part2_out = process_part2(stacks, instruct);
-
-console.log(part1_out)
-
-
